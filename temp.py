@@ -6,6 +6,17 @@ from PIL import ImageFont
 import os
 import psutil
 import subprocess
+import requests
+
+def isOnline(URL):
+	try:
+		response = requests.get(URL, timeout=1)
+		if response.status_code == 200:
+			return "ONLINE"
+		else:
+			return f"{response.status_code}"
+	except requests.exceptions.RequestException as e:
+		return f"Error: {e}"
 
 def getCPUTemp():
 	try:
@@ -20,13 +31,15 @@ font = ImageFont.load_default()
 
 def printCPU():
 	cpu_temp = getCPUTemp()
+	shananiki_isonline = isOnline("https://shananiki.org")
 	with canvas(device) as draw:
 		draw.text((5, 5), f"CPU: {cpu_temp}°C", font=font, fill=255)
+		draw.text((5, 15), f"Shananiki.org: {shananiki_isonline}", font=font, fill=255)
 
 try:
 	while True:
 		printCPU()
-		time.sleep(1)
+		time.sleep(1.2)
 
 except KeyboardInterrupt:
 	print("Monitor stopped.")
