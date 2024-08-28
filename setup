@@ -1,0 +1,23 @@
+## Installing nginx 
+sudo apt-get install nginx-extras -y
+sudo apt-get install python3-luma.oled
+sudo apt install certbot python3-certbot-nginx -y
+
+
+
+## Installing nodejs and nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+sudo echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.bashrc && sudo echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+source ~/.bashrc
+nvm install --lts
+nvm use --lts
+
+## Globally install pm2
+npm install -g pm2
+
+## Setting up paths for my nodeJS apps
+sudo mkdir ~/node
+
+## Faster setting up nodeJS nginx apps
+sudo echo "alias nginxnpminit='npm i dotenv express cors'" >> ~/.bashrc
+source ~/.bashrc
